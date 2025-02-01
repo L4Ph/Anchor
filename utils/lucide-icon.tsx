@@ -1,18 +1,18 @@
-import { jsx, type JSX } from "hono/jsx"
-import type { IconNode } from "https://esm.sh/lucide@0.474.0"
+import { type JSX, jsx } from "hono/jsx";
+import type { IconNode } from "https://esm.sh/lucide@0.474.0";
 
 type Props = JSX.IntrinsicElements["div"] & {
-  icon: IconNode
-}
+  icon: IconNode;
+};
 
 export function LucideIcon(props: Props) {
   const {
     icon: [title, svgProps, paths],
     ...rest
-  } = props
+  } = props;
 
   if (paths === undefined) {
-    return <svg />
+    return <svg />;
   }
 
   return (
@@ -21,5 +21,5 @@ export function LucideIcon(props: Props) {
       {/* @ts-ignore */}
       {paths.map(([tag, svgProps]) => jsx(tag, { ...svgProps }))}
     </svg>
-  )
+  );
 }
