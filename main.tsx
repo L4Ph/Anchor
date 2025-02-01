@@ -178,7 +178,7 @@ const Top: FC<{userData: LanyardResponseData}> = ({userData}) => {
 }
 
 app.get('/', (c) => {
-  return c.text('Hello Hono!')
+  return c.redirect("https://github.com/L4Ph/Anchor", 301)
 })
 
 app.get("/users", (c) => {
