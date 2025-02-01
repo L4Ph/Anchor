@@ -12,14 +12,19 @@ import { LanyardResponse, LanyardResponseData } from "./types/lanyard.ts";
 import { getActivePlatforms } from "./utils/get-active-platforms.ts";
 import { getActivityNames } from "./utils/get-activity-names.ts";
 import { getGitHubUrl } from "./utils/get-github-url.ts";
+import { serveStatic } from "hono/deno";
 // import * as clippy from "https://deno.land/x/clippy@v1.0.0/mod.ts";
 
 const app = new Hono();
 
+app.use("/static/*", serveStatic({ root: "./" }));
+
 const Layout: FC = (props) => {
   return (
     <html>
-      <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+      <head>
+        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+      </head>
       <body>{props.children}</body>
     </html>
   );
@@ -40,33 +45,32 @@ const Top: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
                   className="w-32 h-32 rounded-full border-4 border-purple-500 shadow-lg"
                 />
               </div>
-              <div>
-                <h1 className="mt-6 text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
-                  {userData.discord_user.global_name}
-                </h1>
-                {getGitHubUrl(userData) && (
-                  <div className="mt-4 flex items-center gap-2">
-                    <LucideIcon class="w-5 h-5 text-gray-300" icon={Github} />
-                    <a
-                      href={getGitHubUrl(userData)!.url}
-                      className="text-gray-300 hover:text-purple-400 transition-colors"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {getGitHubUrl(userData)!.username}
-                    </a>
-                  </div>
-                )}
-                {
-                  /* <button
+              <h1 className="mt-6 text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+                {userData.discord_user.global_name ||
+                  userData.discord_user.username}
+              </h1>
+              {getGitHubUrl(userData) && (
+                <div className="mt-4 flex items-center gap-2">
+                  <LucideIcon class="w-5 h-5 text-gray-300" icon={Github} />
+                  <a
+                    href={getGitHubUrl(userData)!.url}
+                    className="text-gray-300 hover:text-purple-400 transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {getGitHubUrl(userData)!.username}
+                  </a>
+                </div>
+              )}
+              {
+                /* <button
                     className="mt-4 flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 active:scale-95 transition text-white rounded-lg shadow-md"
                     onClick={copyUsername}
                   >
                   <LucideIcon class="w-5 h-5" icon={Clipboard} />
                   <span>Copy Name</span>
                 </button> */
-                }
-              </div>
+              }
               {userData.kv.profile && (
                 <p className="mt-4 text-gray-300 text-lg">
                   {userData.kv.profile}
@@ -145,7 +149,7 @@ app.get("/", (c) => {
 });
 
 app.get("/users", (c) => {
-  const userId = c.req.param("userId");
+  const userId = "819287687121993768";
   return c.redirect(`/users/${userId}`);
 });
 
