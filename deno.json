@@ -5,8 +5,7 @@
     "hono": "jsr:@hono/hono@^4.6.20"
   },
   "tasks": {
-    "start": "deno run -A main.tsx",
-    "unocss:build": "deno run -A --unstable-detect-cjs npm:@unocss/cli"
+    "start": "deno run -A --unstable-detect-cjs npm:@unocss/cli && deno run -A main.tsx"
   },
   "compilerOptions": {
     "jsx": "precompile",
