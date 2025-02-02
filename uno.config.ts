@@ -10,10 +10,10 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetWebFonts({
-        provider: "google",
-        fonts: {
-            sans: "M PLUS 2"
-        }
-    })
+      provider: "google",
+      fonts: {
+        sans: "M PLUS 2",
+      },
+    }),
   ],
 });

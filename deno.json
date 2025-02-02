@@ -4,6 +4,9 @@
     "unocss/": "https://esm.sh/v135/*unocss@65.4.3/",
     "hono": "jsr:@hono/hono@^4.6.20"
   },
+  "fmt": {
+    "exclude": ["node_modules", "static/*.css"]
+  },
   "tasks": {
     "start": "deno run -A --unstable-detect-cjs npm:@unocss/cli && deno run -A main.tsx"
   },
