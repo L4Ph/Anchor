@@ -24,10 +24,10 @@ app.get("/static/*", serveStatic({ root: "./" }));
 
 const Top: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
   return (
-    <div className="font-sans min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+    <div className="font-sans h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white overflow-hidden">
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+      <div className="container max-w-full mx-auto px-4 py-16">
+        <div className="flex flex-col md:flex-row flex-wrap items-center justify-between gap-12 max-w-7xl mx-auto">
           <div className="flex-1">
             <div className="relative">
               <img
@@ -77,15 +77,15 @@ const Top: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
             )}
           </div>
 
-          {/* Currently Playing */}
-          <div className="flex-1">
+          {/* Now Playing */}
+          <div className="flex-1 max-w-md md:items-start">
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
               <h2 className="flex items-center gap-2 text-xl font-semibold mb-4">
                 <LucideIcon
                   class={"w-5 h-5 text-purple-400"}
                   icon={Music}
                 />
-                Currently Playing
+                Now Playing
               </h2>
               <div className="flex items-center gap-4">
                 <img
@@ -97,7 +97,7 @@ const Top: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
                 <div>
                   <h3 className="font-medium text-lg">
                     {userData.spotify?.song ||
-                      "There are no songs currently playing."}
+                      "There are no songs."}
                   </h3>
                   <p className="text-gray-400">{userData.spotify?.artist}</p>
                   <p className="text-gray-500 text-sm">
@@ -112,16 +112,16 @@ const Top: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
 
       {/* Stats Section */}
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center md:items-start">
           <div className="bg-gray-800/30 rounded-xl p-6 border border-gray-700">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-4">
               <LucideIcon class={"w-5 h-5 text-purple-400"} icon={User} />
               <h3 className="text-lg font-medium">Discord Status</h3>
             </div>
             <p className="mt-2 text-green-400">{userData.discord_status}</p>
           </div>
           <div className="bg-gray-800/30 rounded-xl p-6 border border-gray-700">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-4">
               <LucideIcon class={"w-5 h-5 text-purple-400"} icon={Globe} />
               <h3 className="text-lg font-medium">Platform</h3>
             </div>
@@ -130,7 +130,7 @@ const Top: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
             </p>
           </div>
           <div className="bg-gray-800/30 rounded-xl p-6 border border-gray-700">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-4">
               <LucideIcon class={"w-5 h-5 text-purple-400"} icon={Clock} />
               <h3 className="text-lg font-medium">Activity</h3>
             </div>
@@ -164,7 +164,7 @@ app.get(
           />
           <link rel="stylesheet" href="/static/uno.css" />
         </head>
-        <body>{children}</body>
+        <body class={"m-0 overflow-hidden"}>{children}</body>
       </html>
     );
   }),
