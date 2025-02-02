@@ -4,6 +4,7 @@ import {
   Clock,
   Github,
   Globe,
+  Mail,
   Music,
   User,
 } from "https://esm.sh/lucide@0.474.0";
@@ -12,12 +13,9 @@ import { LanyardResponse, LanyardResponseData } from "./types/lanyard.ts";
 import { getActivePlatforms } from "./utils/get-active-platforms.ts";
 import { getActivityNames } from "./utils/get-activity-names.ts";
 import { getGitHubUrl } from "./utils/get-github-url.ts";
-import { serveStatic } from "hono/deno";
 // import * as clippy from "https://deno.land/x/clippy@v1.0.0/mod.ts";
 
 const app = new Hono();
-
-app.use("/static/*", serveStatic({ root: "./" }));
 
 const Layout: FC = (props) => {
   return (
@@ -49,28 +47,36 @@ const Top: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
                 {userData.discord_user.global_name ||
                   userData.discord_user.username}
               </h1>
-              {getGitHubUrl(userData) && (
-                <div className="mt-4 flex items-center gap-2">
-                  <LucideIcon class="w-5 h-5 text-gray-300" icon={Github} />
-                  <a
-                    href={getGitHubUrl(userData)!.url}
-                    className="text-gray-300 hover:text-purple-400 transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {getGitHubUrl(userData)!.username}
-                  </a>
-                </div>
-              )}
-              {
-                /* <button
-                    className="mt-4 flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 active:scale-95 transition text-white rounded-lg shadow-md"
-                    onClick={copyUsername}
-                  >
-                  <LucideIcon class="w-5 h-5" icon={Clipboard} />
-                  <span>Copy Name</span>
-                </button> */
-              }
+
+              <div className="flex flex-wrap gap-4 mt-4">
+                {userData.kv.email && (
+                  <div className="flex items-center gap-2">
+                    <LucideIcon class="w-5 h-5 text-gray-300" icon={Mail} />
+                    <a
+                      href={`mailto:${userData.kv.email}`}
+                      className="text-gray-300 hover:text-purple-400 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {userData.kv.email}
+                    </a>
+                  </div>
+                )}
+                {getGitHubUrl(userData) && (
+                  <div className="flex items-center gap-2">
+                    <LucideIcon class="w-5 h-5 text-gray-300" icon={Github} />
+                    <a
+                      href={getGitHubUrl(userData)!.url}
+                      className="text-gray-300 hover:text-purple-400 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {getGitHubUrl(userData)!.username}
+                    </a>
+                  </div>
+                )}
+              </div>
+
               {userData.kv.profile && (
                 <p className="mt-4 text-gray-300 text-lg">
                   {userData.kv.profile}
@@ -79,35 +85,35 @@ const Top: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
             </div>
 
             {/* Currently Playing */}
-            {userData.spotify?.song && (
-              <div className="flex-1">
-                <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
-                  <h2 className="flex items-center gap-2 text-xl font-semibold mb-4">
-                    <LucideIcon
-                      class={"w-5 h-5 text-purple-400"}
-                      icon={Music}
-                    />
-                    Currently Playing
-                  </h2>
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={userData.spotify.album_art_url}
-                      alt="Album Art"
-                      className="w-24 h-24 rounded-lg shadow-lg"
-                    />
-                    <div>
-                      <h3 className="font-medium text-lg">
-                        {userData.spotify.song}
-                      </h3>
-                      <p className="text-gray-400">{userData.spotify.artist}</p>
-                      <p className="text-gray-500 text-sm">
-                        {userData.spotify.album}
-                      </p>
-                    </div>
+            <div className="flex-1">
+              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+                <h2 className="flex items-center gap-2 text-xl font-semibold mb-4">
+                  <LucideIcon
+                    class={"w-5 h-5 text-purple-400"}
+                    icon={Music}
+                  />
+                  Currently Playing
+                </h2>
+                <div className="flex items-center gap-4">
+                  <img
+                    src={userData.spotify?.album_art_url ||
+                      "https://placehold.jp/20/c27aff/ffffff/640x640.jpeg?text=No+song"}
+                    alt="Album Art"
+                    className="w-24 h-24 rounded-lg shadow-lg"
+                  />
+                  <div>
+                    <h3 className="font-medium text-lg">
+                      {userData.spotify?.song ||
+                        "There are no songs currently playing."}
+                    </h3>
+                    <p className="text-gray-400">{userData.spotify?.artist}</p>
+                    <p className="text-gray-500 text-sm">
+                      {userData.spotify?.album || ""}
+                    </p>
                   </div>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
 
