@@ -5,10 +5,13 @@
     "jsr:@std/encoding@*": "1.0.7",
     "jsr:@std/encoding@1": "1.0.7",
     "npm:@types/node@*": "22.5.4",
+    "npm:@unocss/cli@*": "65.4.3",
+    "npm:@unocss/cli@^65.4.3": "65.4.3",
     "npm:@unocss/postcss@*": "65.4.3_postcss@8.5.1",
     "npm:@unocss/runtime@65.4.3": "65.4.3",
     "npm:css-tree@*": "3.1.0",
-    "npm:unocss@*": "65.4.3_@types+node@22.5.4"
+    "npm:unocss@*": "65.4.3_@types+node@22.5.4",
+    "npm:unocss@^65.4.3": "65.4.3_@types+node@22.5.4"
   },
   "jsr": {
     "@hono/hono@4.6.20": {
@@ -1047,7 +1050,8 @@
     "https://esm.sh/supports-color?target=denonext": "https://esm.sh/supports-color@10.0.0?target=denonext",
     "https://esm.sh/tinyexec@^0.3.0?target=denonext": "https://esm.sh/tinyexec@0.3.2?target=denonext",
     "https://esm.sh/ufo@^1.5.4?target=denonext": "https://esm.sh/ufo@1.5.4?target=denonext",
-    "https://esm.sh/unocss": "https://esm.sh/unocss@65.4.3"
+    "https://esm.sh/unocss": "https://esm.sh/unocss@65.4.3",
+    "https://esm.sh/unocss@^65.4.3": "https://esm.sh/unocss@65.4.3"
   },
   "remote": {
     "https://deno.land/std@0.176.0/_util/asserts.ts": "178dfc49a464aee693a7e285567b3d0b555dc805ff490505a8aae34f9cfb1462",

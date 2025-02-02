@@ -14,17 +14,17 @@ import { getActivePlatforms } from "./utils/get-active-platforms.ts";
 import { getActivityNames } from "./utils/get-activity-names.ts";
 import { getGitHubUrl } from "./utils/get-github-url.ts";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { serveStatic } from 'hono/deno'
+import { serveStatic } from "hono/deno";
 
 // import * as clippy from "https://deno.land/x/clippy@v1.0.0/mod.ts";
 
 const app = new Hono();
 
-app.get('/static/*', serveStatic({ root: './' }))
+app.get("/static/*", serveStatic({ root: "./" }));
 
 const Top: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+    <div className="font-sans min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
@@ -157,9 +157,12 @@ app.get(
     return (
       <html lang="en">
         <head>
-          <script src="https://cdn.jsdelivr.net/npm/@unocss/preset-web-fonts"></script>
-          <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/normalize.min.css" />
+          <meta charset="UTF-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="stylesheet" href="/static/uno.css" />
         </head>
         <body>{children}</body>
       </html>
