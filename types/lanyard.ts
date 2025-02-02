@@ -50,6 +50,7 @@ type Spotify = {
 export type LanyardResponseData = {
   kv: {
     profile?: string;
+    email?: string;
     github?: string;
     [key: string]: unknown;
   };

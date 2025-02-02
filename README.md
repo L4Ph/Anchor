@@ -9,3 +9,19 @@
 
 3. Go https://anchor.deno.dev/users/{your_user_id}\
    e.g https://anchor.deno.dev/users/481507352357634049
+
+## Customization
+
+Go `kv-commands` channel
+
+Supported KVs
+
+- profile
+- email
+- github
+
+```sh
+.set profile {your profile}
+.set email {your email address}
+.set github {your github url or github user name}
+```
