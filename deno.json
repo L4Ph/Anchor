@@ -1,12 +1,48 @@
 {
   "imports": {
+    "unocss": "https://esm.sh/v135/*unocss@65.4.3",
+    "unocss/": "https://esm.sh/v135/*unocss@65.4.3/",
     "hono": "jsr:@hono/hono@^4.6.20"
   },
+  "fmt": {
+    "exclude": ["node_modules", "static/*.css"]
+  },
   "tasks": {
-    "start": "deno run -A main.tsx"
+    "start": "deno run -A --unstable-detect-cjs npm:@unocss/cli && deno run -A main.tsx"
   },
   "compilerOptions": {
     "jsx": "precompile",
     "jsxImportSource": "hono/jsx"
+  },
+  "scopes": {
+    "https://esm.sh/v135/": {
+      "@ampproject/remapping": "https://esm.sh/v135/@ampproject/remapping@2.3.0",
+      "@rollup/pluginutils": "https://esm.sh/v135/@rollup/pluginutils@5.1.4",
+      "@unocss/astro": "https://esm.sh/v135/@unocss/astro@65.4.3",
+      "@unocss/config": "https://esm.sh/v135/@unocss/config@65.4.3",
+      "@unocss/core": "https://esm.sh/v135/@unocss/core@65.4.3",
+      "@unocss/postcss": "https://esm.sh/v135/@unocss/postcss@65.4.3",
+      "@unocss/preset-attributify": "https://esm.sh/v135/@unocss/preset-attributify@65.4.3",
+      "@unocss/preset-icons": "https://esm.sh/v135/@unocss/preset-icons@65.4.3",
+      "@unocss/preset-mini": "https://esm.sh/v135/@unocss/preset-mini@65.4.3",
+      "@unocss/preset-tagify": "https://esm.sh/v135/@unocss/preset-tagify@65.4.3",
+      "@unocss/preset-typography": "https://esm.sh/v135/@unocss/preset-typography@65.4.3",
+      "@unocss/preset-uno": "https://esm.sh/v135/@unocss/preset-uno@65.4.3",
+      "@unocss/preset-web-fonts": "https://esm.sh/v135/@unocss/preset-web-fonts@65.4.3",
+      "@unocss/preset-wind": "https://esm.sh/v135/@unocss/preset-wind@65.4.3",
+      "@unocss/transformer-attributify-jsx": "https://esm.sh/v135/@unocss/transformer-attributify-jsx@65.4.3",
+      "@unocss/transformer-compile-class": "https://esm.sh/v135/@unocss/transformer-compile-class@65.4.3",
+      "@unocss/transformer-directives": "https://esm.sh/v135/@unocss/transformer-directives@65.4.3",
+      "@unocss/transformer-variant-group": "https://esm.sh/v135/@unocss/transformer-variant-group@65.4.3",
+      "@unocss/vite": "https://esm.sh/v135/@unocss/vite@65.4.3",
+      "cac": "https://esm.sh/v135/cac@6.7.14",
+      "chokidar": "https://esm.sh/v135/chokidar@3.6.0",
+      "colorette": "https://esm.sh/v135/colorette@2.0.20",
+      "consola": "https://esm.sh/v135/consola@3.4.0",
+      "magic-string": "https://esm.sh/v135/magic-string@0.30.17",
+      "pathe": "https://esm.sh/v135/pathe@2.0.2",
+      "perfect-debounce": "https://esm.sh/v135/perfect-debounce@1.0.0",
+      "tinyglobby": "https://esm.sh/v135/tinyglobby@0.2.10"
+    }
   }
 }
