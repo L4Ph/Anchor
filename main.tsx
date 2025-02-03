@@ -2,10 +2,12 @@ import { Hono } from "hono";
 import { FC } from "hono/jsx";
 import {
   Clock,
+  Facebook,
   Github,
   Globe,
   Mail,
   Music,
+  Twitter,
   User,
 } from "https://esm.sh/lucide@0.474.0";
 import { LucideIcon } from "./utils/lucide-icon.tsx";
@@ -99,6 +101,35 @@ const NowPlaying: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
             </p>
           </div>
         </div>
+        {userData.spotify && userData.spotify.song && userData.spotify.artist &&
+          (
+            <div className="flex justify-end mt-2 space-x-2">
+              <a
+                href={`https://x.com/intent/tweet?text=${
+                  encodeURIComponent(
+                    `${userData.spotify.song} by ${userData.spotify.artist}\n#NowPlaying\nhttps://open.spotify.com/track/${userData.spotify.track_id}`,
+                  )
+                }`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm"
+              >
+                <LucideIcon class={""} icon={Twitter} />
+              </a>
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${
+                  encodeURIComponent(
+                    `https://open.spotify.com/track/${userData.spotify.track_id}`,
+                  )
+                }`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm"
+              >
+                <LucideIcon class={""} icon={Facebook} />
+              </a>
+            </div>
+          )}
       </div>
     </div>
   );
