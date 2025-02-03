@@ -85,7 +85,7 @@ const NowPlaying: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
         <div className="flex items-center gap-2">
           <img
             src={userData.spotify?.album_art_url ||
-              "https://placehold.jp/20/c27aff/ffffff/640x640.jpeg?text=No+song"}
+              "https://images.placeholders.dev/?width=160&height=160&text=No%20song"}
             alt="Album Art"
             className="w-16 h-16 md:w-24 md:h-24 rounded-lg shadow-lg"
           />
