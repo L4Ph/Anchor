@@ -25,3 +25,9 @@ Supported KVs
 .set email {your email address}
 .set github {your github url or github user name}
 ```
+
+## Tech Stack
+
+- [Hono](https://hono.dev/)
+- [Deno](https://deno.com/)
+- [TailwindCSS](https://tailwindcss.com/)
