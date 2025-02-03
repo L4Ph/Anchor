@@ -1,6 +1,5 @@
 {
   "imports": {
-    "@fontsource-variable/m-plus-2": "https://esm.sh/v135/@fontsource-variable/m-plus-2@5.1.1",
     "tailwindcss": "https://esm.sh/v135/tailwindcss@4.0.3",
     "tailwindcss/": "https://esm.sh/v135/tailwindcss@4.0.3/",
     "hono": "jsr:@hono/hono@^4.6.20"
