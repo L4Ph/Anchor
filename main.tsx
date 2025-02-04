@@ -9,6 +9,7 @@ import {
   Music,
   Twitter,
   User,
+  type IconNode
 } from "https://esm.sh/lucide@0.474.0";
 import { LucideIcon } from "./utils/lucide-icon.tsx";
 import { LanyardResponse, LanyardResponseData } from "./types/lanyard.ts";
@@ -30,20 +31,20 @@ const HeroSection: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
         <img
           src={`https://cdn.discordapp.com/avatars/${userData.discord_user.id}/${userData.discord_user.avatar}`}
           alt="Profile"
-          className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-purple-500 shadow-lg"
+          className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-primary shadow-lg"
         />
       </div>
-      <h1 className="mt-4 text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+      <h1 className="mt-4 text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
         {userData.discord_user.global_name || userData.discord_user.username}
       </h1>
 
       <div className="flex flex-wrap gap-2 mt-2">
         {userData.kv.email && (
           <div className="flex items-center gap-1">
-            <LucideIcon class="w-4 h-4 text-gray-300" icon={Mail} />
+            <LucideIcon class="w-4 h-4 text-neutral" icon={Mail} />
             <a
               href={`mailto:${userData.kv.email}`}
-              className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
+              className="link link-primary transition-colors text-sm"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -53,10 +54,10 @@ const HeroSection: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
         )}
         {getGitHubUrl(userData) && (
           <div className="flex items-center gap-1">
-            <LucideIcon class="w-4 h-4 text-gray-300" icon={Github} />
+            <LucideIcon class="w-4 h-4 text-neutral" icon={Github} />
             <a
               href={getGitHubUrl(userData)!.url}
-              className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
+              className="link-primary transition-colors text-sm"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -67,7 +68,7 @@ const HeroSection: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
       </div>
 
       {userData.kv.profile && (
-        <p className="mt-2 text-gray-400 text-base md:text-lg">
+        <p className="mt-2 text-base-content md:text-lg">
           {userData.kv.profile}
         </p>
       )}
@@ -75,13 +76,34 @@ const HeroSection: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
   );
 };
 
+// ShareButton
+const ShareButton: FC<{
+  icon: IconNode;
+  url: string;
+  text: string;
+  className?: string;
+// deno-lint-ignore no-unused-vars
+}> = ({ icon: Icon, url, text, className }) => {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${className} text-base-content font-bold py-2 px-4 rounded text-sm`}
+    >
+      <LucideIcon class="" icon={Icon} />
+    </a>
+  );
+};
+
+
 // NowPlaying
 const NowPlaying: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
   return (
     <div className="flex-1">
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700">
+      <div className="bg-base backdrop-blur-sm rounded-xl p-4 border border-base-300">
         <h2 className="flex items-center gap-1 text-lg font-semibold mb-2">
-          <LucideIcon class={"w-4 h-4 text-purple-400"} icon={Music} />
+          <LucideIcon class={"w-4 h-4 text-primary"} icon={Music} />
           Now Playing
         </h2>
         <div className="flex items-center gap-2">
@@ -89,46 +111,38 @@ const NowPlaying: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
             src={userData.spotify?.album_art_url ||
               "https://images.placeholders.dev/?width=160&height=160&text=No%20song"}
             alt="Album Art"
-            className="w-16 h-16 md:w-24 md:h-24 rounded-lg shadow-lg"
+            className="w-24 h-24 md:w-32 md:h-32 rounded-lg border-4 border-secondary shadow-lg"
           />
           <div>
             <h3 className="font-medium text-base md:text-lg">
               {userData.spotify?.song || "There are no song."}
             </h3>
-            <p className="text-gray-500 text-xs">{userData.spotify?.artist}</p>
-            <p className="text-gray-600 text-xs md:text-sm">
+            <p className="text-neutral-content text-xs">{userData.spotify?.artist}</p>
+            <p className="text-neutral text-xs md:text-sm">
               {userData.spotify?.album || ""}
             </p>
           </div>
         </div>
         {userData.spotify && userData.spotify.song && userData.spotify.artist &&
           (
-            <div className="flex justify-end mt-2 space-x-2">
-              <a
-                href={`https://x.com/intent/tweet?text=${
-                  encodeURIComponent(
-                    `${userData.spotify.song} by ${userData.spotify.artist}\n#NowPlaying\nhttps://open.spotify.com/track/${userData.spotify.track_id}`,
-                  )
-                }`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm"
-              >
-                <LucideIcon class={""} icon={Twitter} />
-              </a>
-              <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${
-                  encodeURIComponent(
-                    `https://open.spotify.com/track/${userData.spotify.track_id}`,
-                  )
-                }`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm"
-              >
-                <LucideIcon class={""} icon={Facebook} />
-              </a>
-            </div>
+           <div className="flex justify-end mt-2 space-x-2">
+             <ShareButton
+               icon={Twitter}
+               url={`https://x.com/intent/tweet?text=${encodeURIComponent(
+                 `${userData.spotify.song} by ${userData.spotify.artist}\n#NowPlaying\nhttps://open.spotify.com/track/${userData.spotify.track_id}`
+               )}`}
+               text="Twitter"
+               className="btn btn-primary"
+             />
+             <ShareButton
+               icon={Facebook}
+               url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                 `https://open.spotify.com/track/${userData.spotify.track_id}`
+               )}`}
+               text="Facebook"
+               className="btn btn-primary"
+             />
+           </div>
           )}
       </div>
     </div>
@@ -142,19 +156,19 @@ const StatsSection: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
       icon: User,
       title: "Discord Status",
       text: userData.discord_status,
-      textColor: "text-green-400",
+      textColor: "text-accent",
     },
     {
       icon: Globe,
       title: "Platform",
       text: getActivePlatforms(userData),
-      textColor: "text-gray-400",
+      textColor: "text-accent",
     },
     {
       icon: Clock,
       title: "Activity",
       text: getActivityNames(userData),
-      textColor: "text-gray-400",
+      textColor: "text-accent",
     },
   ];
 
@@ -164,10 +178,10 @@ const StatsSection: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-gray-800/30 rounded-xl p-4 border border-gray-700"
+            className="bg-base-100 rounded-xl p-4 border border-base-200"
           >
             <div className="flex items-center gap-2">
-              <LucideIcon class={"w-4 h-4 text-purple-400"} icon={stat.icon} />
+              <LucideIcon class={"w-4 h-4 text-primary"} icon={stat.icon} />
               <h3 className="text-base font-semibold">{stat.title}</h3>
             </div>
             <p className={`mt-1 text-sm ${stat.textColor}`}>{stat.text}</p>
@@ -180,7 +194,7 @@ const StatsSection: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
 
 const Top: FC<{ userData: LanyardResponseData }> = ({ userData }) => {
   return (
-    <div className="font-display min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+    <div className="font-display min-h-screen bg-gradient-to-br from-base-300 to-base-200 text-white">
       {/* Hero Section */}
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12">

@@ -1,5 +1,6 @@
 {
   "imports": {
+    "daisyui": "npm:daisyui@^5.0.0-beta.6",
     "tailwindcss": "https://esm.sh/v135/tailwindcss@4.0.3",
     "tailwindcss/": "https://esm.sh/v135/tailwindcss@4.0.3/",
     "hono": "jsr:@hono/hono@^4.6.20"

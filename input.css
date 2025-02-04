@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  themes: dracula --default
+}
 
 @theme {
   --font-display: "M PLUS 2 Variable", sans-serif;
