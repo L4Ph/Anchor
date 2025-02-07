@@ -4,7 +4,8 @@
     "jsr:@hono/hono@^4.6.20": "4.6.20",
     "jsr:@std/encoding@*": "1.0.7",
     "jsr:@std/encoding@1": "1.0.7",
-    "npm:@tailwindcss/cli@*": "4.0.3"
+    "npm:@tailwindcss/cli@*": "4.0.3",
+    "npm:daisyui@^5.0.0-beta.6": "5.0.0-beta.6"
   },
   "jsr": {
     "@hono/hono@4.6.20": {
@@ -151,6 +152,9 @@
       "dependencies": [
         "fill-range"
       ]
+    },
+    "daisyui@5.0.0-beta.6": {
+      "integrity": "sha512-gwXHv6MApRBrvUayzg83vS6bfZ+y7/1VGLu0a8/cEAMviS4rXLCd4AndEdlVxhq+25wkAp0CZRkNQ7O4wIoFnQ=="
     },
     "detect-libc@1.0.3": {
       "integrity": "sha512-pGjwhsmsp4kL2RTz08wcOlGN83otlqHeD/Z5T8GXZB+/YcpQ/dgo+lbU8ZsGxV0HIvqqxo9l7mqYwyYMD9bKDg=="
@@ -433,12 +437,15 @@
     "https://esm.sh/react@19.0.0?target=denonext": "ab1f4aa20ac56c237bbb204632bdb55f03a0ab005d21944eeb447e5e37879637",
     "https://esm.sh/v135/@fontsource-variable/m-plus-2@5.1.1": "7da4ec8375f51305a373531982535f6b261527d9b173c100ed709b030d2f2a22",
     "https://esm.sh/v135/@fontsource-variable/m-plus-2@5.1.1/denonext/m-plus-2.mjs": "acfafb77db18a35cbd61bd2f4bf23f0de45c2cf13909a8fc927f047891bcedbf",
+    "https://esm.sh/v135/daisyui@5.0.0-beta.6": "1e59101afbd3e640a9703c8cb9c37ad5fd1a1133590f016f8082df3f0f3cf818",
+    "https://esm.sh/v135/daisyui@5.0.0-beta.6/denonext/daisyui.mjs": "c2eefc519f2708d081e486e06c96747ad8a94808f760e1da3d76ab68471df8e7",
     "https://esm.sh/v135/tailwindcss@4.0.3": "f47985b9da0c89187c4186e5feb58fd3732f571adc4ad089622a52163269a04a",
     "https://esm.sh/v135/tailwindcss@4.0.3/denonext/tailwindcss.mjs": "f2745f709552933dc7be3008b9958677d7518eeeaf8738b158003bf3a89ff95b"
   },
   "workspace": {
     "dependencies": [
-      "jsr:@hono/hono@^4.6.20"
+      "jsr:@hono/hono@^4.6.20",
+      "npm:daisyui@^5.0.0-beta.6"
     ]
   }
 }
